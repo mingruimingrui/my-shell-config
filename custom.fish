@@ -58,11 +58,22 @@ end
 
 # SSH and rsync
 function tunnel -a SERVER PORT -d "SSH port-forwarding shortcut"
-	if not type -q $SERVER; echo "Print usage"; end
-	echo $SERVER $PORT
+	if begin not set -q SERVER[1]; or not set -q PORT[1]; end
+		echo "Usage: tunnel SERVER PORT"
+		return 1
+	end
+	ssh -NL "localhost:$PORT":"localhost:$PORT" $SERVER
 end
 
 alias rsync "rsync --cvs-exclude --max-size=10m"
+function upsync -a SERVER DIRECTORY -d "Shortcut to rsync to server"
+	if not set -q SERVER[1]
+		echo "Usage: upsync SERVER [DIRECTORY]"
+		return 1
+	end
+	if not set -q DIRECTORY[1]; set DIRECTORY Projects; end
+	rsync -r $PWD $SERVER:$DIRECTORY/$NAME
+end
 
 # Starship
 starship init fish | source
