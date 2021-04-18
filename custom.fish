@@ -1,10 +1,10 @@
 # Update
-# if test -d ~/.my-shell-config
-# 	function msc-upgrade -d "Get latest version of my-shell-config"
-# 		cd ~/.my-shell-config
-# 		git pull
-# 	end
-# end
+if test -d ~/.my-shell-config
+	function msc-upgrade -d "Get latest version of my-shell-config"
+		cd ~/.my-shell-config
+		git pull
+	end
+end
 
 # Local bin
 if test -d ~/.local/bin
