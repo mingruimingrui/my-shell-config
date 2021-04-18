@@ -40,3 +40,9 @@ ln -sf $REPO_DIR/init.vim ~/.config/nvim/init.vim
 if [ -d "~/miniconda3/bin" ]; then
 	~/miniconda3/bin/conda init fish
 fi
+
+# Install neovim packages
+if command -v nvim > /dev/null; then
+	nvim +PlugClean +PlugUpgrade +PlugUpdate +qall
+	nvim +GoUpdateBinaries +qall
+fi
