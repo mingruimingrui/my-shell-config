@@ -1,0 +1,73 @@
+# Update
+# if test -d ~/.my-shell-config
+# 	function msc-upgrade -d "Get latest version of my-shell-config"
+# 		cd ~/.my-shell-config
+# 		git pull
+# 	end
+# end
+
+# Local bin
+if test -d ~/.local/bin
+	set PATH ~/.local/bin $PATH
+	# fish_add_path ~/.local/bin  # I use debian 10 alot at work...
+end
+
+if test -d ~/bin
+	set PATH ~/bin $PATH
+	# fish_add_path ~/bin  # I use debian 10 alot at work...
+end
+
+# Neovim
+if type -q nvim
+	alias vim nvim
+	function install-nvim-py-pkgs -d "Install python packages for Neovim"
+		pip install --no-cache-dir neovim jedi==0.17.2
+	end
+end
+
+# Brew
+if type -q brew
+	function brew-upgrade-clean -d "Update packages and clean up deps"
+		brew update
+		brew upgrade
+		brew missing
+		brew doctor
+		brew bundle dump
+		brew bundle --force cleanup
+		brew cleanup
+	end
+end
+
+# Conda
+if type -q conda
+	function conda-upgrade-base -d "Upgrade base default conda"
+		conda update -n base -c defaults conda
+	end
+end
+
+# Go
+if test -d ~/.local/go/bin
+	set PATH ~/.local/go/bin $PATH
+	# fish_add_path ~/.local/go/bin  # I use debian 10 alot at work...
+end
+
+if test -d ~/go/bin
+	set PATH ~/go/bin $PATH
+	# fish_add_path ~/go/bin  # I use debian 10 alot at work...
+end
+
+# SSH and rsync
+function tunnel -a SERVER PORT -d "SSH port-forwarding shortcut"
+	if not type -q $SERVER; echo "Print usage"; end
+	echo $SERVER $PORT
+end
+
+alias rsync "rsync --cvs-exclude --max-size=10m"
+
+# Starship
+starship init fish | source
+
+# If in WSL, cd to distro home
+if set -q WSL_DISTRO_NAME
+	cd ~
+end
