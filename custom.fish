@@ -72,7 +72,8 @@ function upsync -a SERVER DIRECTORY -d "Shortcut to rsync to server"
 		return 1
 	end
 	if not set -q DIRECTORY[1]; set DIRECTORY Projects; end
-	rsync -r $PWD $SERVER:$DIRECTORY/$NAME
+	set NAME (basename $PWD)
+	rsync -r $PWD $SERVER:$DIRECTORY
 end
 
 # Starship
