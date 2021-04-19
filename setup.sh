@@ -12,7 +12,7 @@ if ! command -v starship > /dev/null; then
 	echo "Installing starship into ~/.local/bin"
 	curl -fsSL -o install.sh https://starship.rs/install.sh
 	mkdir -p ~/.local/bin
-	sh install.sh -b ~/.local/bin/starship
+	sh install.sh -b ~/.local/bin -f
 	rm install.sh
 fi
 
