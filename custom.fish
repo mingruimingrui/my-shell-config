@@ -45,6 +45,11 @@ if type -q conda
 	end
 end
 
+# Kubernetes
+if type -q kubectl
+	alias kc kubectl
+end
+
 # Go
 if test -d ~/.local/go/bin
 	set PATH ~/.local/go/bin $PATH
