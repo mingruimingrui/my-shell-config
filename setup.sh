@@ -3,8 +3,7 @@ set -e
 
 # Ensure that required softwares are downloaded
 if ! command -v fish > /dev/null; then
-	echo "fish is required"
-	exit 1
+	echo "Remember to install fish later!"
 fi
 
 # starship
