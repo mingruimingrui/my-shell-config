@@ -6,6 +6,9 @@ if test -d ~/.my-shell-config
 	end
 end
 
+set -x LESSCHARSET "utf-8"
+set -x BAT_PAGER "less -iRx4"
+
 # Local bin
 if test -d ~/.local/bin
 	set PATH ~/.local/bin $PATH
