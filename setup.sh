@@ -37,8 +37,8 @@ fi
 
 # Install neovim packages
 if command -v nvim > /dev/null; then
-	nvim +PlugClean +PlugUpgrade +PlugUpdate +qall
-	nvim +GoUpdateBinaries +qall
+	nvim +PlugClean +PlugUpgrade +PlugUpdate +qall | true
+	nvim +GoUpdateBinaries +qall | true
 fi
 
 # Reminder to install fish
