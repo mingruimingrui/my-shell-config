@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-# Ensure that required softwares are downloaded
-if ! command -v fish > /dev/null; then
-	echo "Remember to install fish later!"
-fi
-
 # starship
 if ! command -v starship > /dev/null; then
 	echo "Installing starship into ~/.local/bin"
@@ -45,3 +40,9 @@ if command -v nvim > /dev/null; then
 	nvim +PlugClean +PlugUpgrade +PlugUpdate +qall
 	nvim +GoUpdateBinaries +qall
 fi
+
+# Reminder to install fish
+if ! comamnd -v fish > /dev/null; then
+	echo "Remember to install fish later!"
+fi
+
