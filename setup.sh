@@ -1,6 +1,32 @@
 #!/bin/sh
 set -e
 
+# Install miniconda 3 if needed
+install_miniconda3() {
+	# Writing this as a function makes escaping so much easier
+	if [ -d "$HOME/miniconda3/bin" ]; then
+		exit 0
+	fi
+
+	platform=`uname`
+	if [ $platform = "Linux" ]; then
+		MINICONDA_TYPE="Linux"
+	elif [ $platform = "Darwin" ]; then
+		MINICONDA_TYPE="MacOSX"
+	else
+		echo "Unable to determine system, please install miniconda manually"
+		exit 0
+	fi
+
+	MINICONDA_URL="https://repo.anaconda.com/miniconda/Miniconda3-latest-${MINICONDA_TYPE}-x86_64.sh"
+	echo "Getting miniconda installer from $MINICONDA_URL"
+	curl -o miniconda-installer.sh $MINICONDA_URL
+	sh miniconda-installer.sh -b
+	rm miniconda-installer.sh
+}
+
+install_miniconda3
+
 # Download starship
 if ! command -v starship > /dev/null; then
 	echo "Installing starship into $HOME/.local/bin"
@@ -34,6 +60,9 @@ ln -sf $REPO_DIR/init.vim $HOME/.config/nvim/init.vim
 # Run conda init to modify config.fish
 if [ -d "$HOME/miniconda3/bin" ]; then
 	$HOME/miniconda3/bin/conda init fish
+
+	# This is just me but I install fish locally with conda
+	$HOME/miniconda3/bin/conda install -y -c conda-forge fish
 fi
 
 # Install neovim packages
