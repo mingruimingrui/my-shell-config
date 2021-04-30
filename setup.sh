@@ -1,17 +1,17 @@
 #!/bin/sh
 set -e
 
-# starship
+# Download starship
 if ! command -v starship > /dev/null; then
-	echo "Installing starship into ~/.local/bin"
+	echo "Installing starship into $HOME/.local/bin"
 	curl -fsSL -o install.sh https://starship.rs/install.sh
-	mkdir -p ~/.local/bin
-	sh install.sh -b ~/.local/bin -f
+	mkdir -p $HOME/.local/bin
+	sh install.sh -b $HOME/.local/bin -f
 	rm install.sh
 fi
 
 # Download repository
-REPO_DIR=~/.my-shell-config
+REPO_DIR=$HOME/.my-shell-config
 if [ ! -d "$REPO_DIR" ]; then
 	echo "Downloading my-shell-config"
 	REPO_URL=https://github.com/mingruimingrui/my-shell-config.git
@@ -23,16 +23,17 @@ fi
 cd $REPO_DIR
 
 # Symlink files over
-mkdir -p ~/.config/fish
-cp $REPO_DIR/config.fish ~/.config/fish/config.fish  # config.fish is a stub
-ln -sf $REPO_DIR/custom.fish ~/.config/fish/custom.fish
+echo "Linking configs"
+mkdir -p $HOME/.config/fish
+cp $REPO_DIR/config.fish $HOME/.config/fish/config.fish  # config.fish is a stub
+ln -sf $REPO_DIR/custom.fish $HOME/.config/fish/custom.fish
 
-mkdir -p ~/.config/nvim
-ln -sf $REPO_DIR/init.vim ~/.config/nvim/init.vim
+mkdir -p $HOME/.config/nvim
+ln -sf $REPO_DIR/init.vim $HOME/.config/nvim/init.vim
 
 # Run conda init to modify config.fish
-if [ -d "~/miniconda3/bin" ]; then
-	~/miniconda3/bin/conda init fish
+if [ -d "$HOME/miniconda3/bin" ]; then
+	$HOME/miniconda3/bin/conda init fish
 fi
 
 # Install neovim packages
@@ -42,7 +43,6 @@ if command -v nvim > /dev/null; then
 fi
 
 # Reminder to install fish
-if ! comamnd -v fish > /dev/null; then
+if ! command -v fish > /dev/null; then
 	echo "Remember to install fish later!"
 fi
-
