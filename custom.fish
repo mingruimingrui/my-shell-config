@@ -20,6 +20,12 @@ if test -d ~/bin
 	# fish_add_path ~/bin  # I use debian 10 alot at work...
 end
 
+# Google Cloud SDK
+if test -d ~/google-cloud-sdk/bin
+	set PATH ~/google-cloud-sdk/bin $PATH
+	# fish_add_path ~/google-cloud-sdk/bin  # I use debian 10 alot at work...
+end
+
 # Neovim
 if type -q nvim
 	alias vim nvim
