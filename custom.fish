@@ -1,3 +1,6 @@
+# Random note: # I use debian 10 alot at work, the default fish version there
+# doesn't have fish_add_path.
+
 # Update
 if test -d ~/.my-shell-config
 	function msc-upgrade -d "Get latest version of my-shell-config"
@@ -12,12 +15,27 @@ set -x BAT_PAGER "less -iRx4"
 # Local bin
 if test -d ~/.local/bin
 	set PATH ~/.local/bin $PATH
-	# fish_add_path ~/.local/bin  # I use debian 10 alot at work...
+	# fish_add_path ~/.local/bin
 end
 
 if test -d ~/bin
 	set PATH ~/bin $PATH
-	# fish_add_path ~/bin  # I use debian 10 alot at work...
+	# fish_add_path ~/bin
+end
+
+# Starship
+starship init fish | source
+
+# Kubernetes
+if type -q kubectl
+	alias kc kubectl
+end
+
+# Conda
+if type -q conda
+	function conda-upgrade-base -d "Upgrade base default conda"
+		conda update -n base -c defaults conda
+	end
 end
 
 # Neovim
@@ -41,13 +59,6 @@ if type -q brew
 	end
 end
 
-# Python
-if type -q conda
-	function conda-upgrade-base -d "Upgrade base default conda"
-		conda update -n base -c defaults conda
-	end
-end
-
 function pyclean -d "Recursively clean directory from .pyc and .pyo files and python3 __pycache__ folders"
   set -l path2CLEAN
 
@@ -60,20 +71,21 @@ function pyclean -d "Recursively clean directory from .pyc and .pyo files and py
   find $path2CLEAN -type f -name "*.py[co]" -delete -or -type d -name "__pycache__" -delete
 end
 
-# Kubernetes
-if type -q kubectl
-	alias kc kubectl
-end
-
 # Go
 if test -d ~/.local/go/bin
 	set PATH ~/.local/go/bin $PATH
-	# fish_add_path ~/.local/go/bin  # I use debian 10 alot at work...
+	# fish_add_path ~/.local/go/bin
 end
 
 if test -d ~/go/bin
 	set PATH ~/go/bin $PATH
-	# fish_add_path ~/go/bin  # I use debian 10 alot at work...
+	# fish_add_path ~/go/bin
+end
+
+# Rust
+if test -d ~/.cargo/bin
+	set PATH $HOME/.cargo/bin $PATH
+	# fish_add_path ~/.cargo/bin
 end
 
 # SSH and rsync
@@ -95,9 +107,6 @@ function upsync -a SERVER DIRECTORY -d "Shortcut to rsync to server"
 	set NAME (basename $PWD)
 	rsync -r $PWD $SERVER:$DIRECTORY
 end
-
-# Starship
-starship init fish | source
 
 # If in WSL, cd to distro home
 if set -q WSL_DISTRO_NAME
