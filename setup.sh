@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-# starship
+# Download starship
 if ! command -v starship > /dev/null; then
   echo "Installing starship into ~/.local/bin"
   curl -fsSL -o install.sh https://starship.rs/install.sh
@@ -11,7 +11,7 @@ if ! command -v starship > /dev/null; then
 fi
 
 # Download repository
-REPO_DIR=~/.my-shell-config
+REPO_DIR=$HOME/.my-shell-config
 if [ ! -d "$REPO_DIR" ]; then
   echo "Downloading my-shell-config"
   REPO_URL=https://github.com/mingruimingrui/my-shell-config.git
@@ -42,6 +42,6 @@ if command -v nvim > /dev/null; then
 fi
 
 # Reminder to install fish
-if ! comamnd -v fish > /dev/null; then
+if ! command -v fish > /dev/null; then
   echo "Remember to install fish later!"
 fi
