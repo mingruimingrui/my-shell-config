@@ -41,8 +41,14 @@ end
 # Neovim
 if type -q nvim
 	alias vim nvim
+
 	function install-nvim-py-pkgs -d "Install python packages for Neovim"
 		pip install --no-cache-dir neovim jedi==0.17.2
+	end
+
+	function update-nvim-plugs -d "Update Neovim plugins"
+		nvim +PlugClean +PlugUpgrade +PlugUpdate +qall | true
+  		nvim +GoUpdateBinaries +qall | true
 	end
 end
 
