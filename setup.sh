@@ -11,8 +11,8 @@ if ! command -v starship > /dev/null; then
 fi
 
 # Download repository
-REPO_DIR=$HOME/.my-shell-config
-if [ ! -d "$REPO_DIR" ]; then
+REPO_DIR=~/.my-shell-config
+if [ ! -d $REPO_DIR ]; then
   echo "Downloading my-shell-config"
   REPO_URL=https://github.com/mingruimingrui/my-shell-config.git
   if [ ! -z "$USE_SSH" ]; then
@@ -29,7 +29,7 @@ ln -sf $REPO_DIR/custom.fish ~/.config/fish/custom.fish
 ln -sf $REPO_DIR/init.vim ~/.config/nvim/init.vim
 
 # Run conda init to modify config.fish
-if [ -d "~/miniconda3/bin" ]; then
+if [ -d ~/miniconda3/bin ]; then
   echo "Running conda init"
   ~/miniconda3/bin/conda init fish
 fi
