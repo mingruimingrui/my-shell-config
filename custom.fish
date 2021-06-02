@@ -31,6 +31,12 @@ if type -q kubectl
 	alias kc kubectl
 end
 
+# GCloud
+if test -d ~/google-cloud-sdk/bin
+	set PATH ~/google-cloud-sdk/bin $PATH
+	# fish_add_path ~/google-cloud-sdk/bin
+end
+
 # Conda
 if type -q conda
 	function conda-upgrade-base -d "Upgrade base default conda"
