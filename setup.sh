@@ -14,11 +14,8 @@ fi
 REPO_DIR=~/.my-shell-config
 if [ ! -d $REPO_DIR ]; then
   echo "Downloading my-shell-config"
-  REPO_URL=https://github.com/mingruimingrui/my-shell-config.git
-  if [ ! -z "$USE_SSH" ]; then
-    REPO_URL=git@github.com:mingruimingrui/my-shell-config.git
-  fi
-  git clone $REPO_URL $REPO_DIR
+  git clone git@github.com:mingruimingrui/my-shell-config.git $REPO_DIR || \
+  git clone https://github.com/mingruimingrui/my-shell-config.git $REPO_DIR
 fi
 cd $REPO_DIR
 
